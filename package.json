@@ -1,0 +1,16 @@
+{
+  "name": "observeflow",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+"scripts" : {
+"dev:web":"bun --filter web run dev",
+"dev:api":"bun --filter api run dev"
+},
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
