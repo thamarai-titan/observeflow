@@ -55,3 +55,17 @@ model Endpoint {
 
   requestLogs RequestLog[]
 }
+
+model RequestLog {
+  id            String   @id @default(uuid())
+  path          String
+  method        String
+  statusCode    Int
+  responseTime  Int
+  createdAt     DateTime @default(now())
+
+  projectId     String
+  project       Project  @relation(fields: [projectId], references: [id])
+
+  @@index([projectId])
+}
