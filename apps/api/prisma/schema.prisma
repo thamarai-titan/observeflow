@@ -29,3 +29,21 @@ model User {
 
   projects Project[]
 }
+
+model Projects {
+  id String @id @defult(uuid())
+  name String
+  description String 
+  apiKey String @unique
+  createdAt DateTime @default(now())
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
+
+  endpoints Endpoints[]
+}
+
+model Endpoint {
+  id String @id @default(uuid())
+  
+}
