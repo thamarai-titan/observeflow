@@ -1,9 +1,9 @@
 // src/app.ts
 
-import express, { Application, Request, Response, NextFunction } from "express";
+import express from "express"
+import type { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import morgan from "morgan";
-import routes from "./routes";
 
 const app: Application = express();
 
@@ -13,8 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-// Routes
-app.use("/api", routes);
+
 
 // Health check
 app.get("/", (req: Request, res: Response) => {
