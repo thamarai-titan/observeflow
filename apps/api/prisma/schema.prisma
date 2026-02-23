@@ -5,8 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
+  engineType = "client"
 }
 
 datasource db {
@@ -27,11 +27,11 @@ model User {
   role Role @default(USER)
   createdAt DateTime @default(now())
 
-  projects Project[]
+  projects Projects[]
 }
 
 model Projects {
-  id String @id @defult(uuid())
+  id String @id @default(uuid())
   name String
   description String 
   apiKey String @unique
@@ -41,9 +41,10 @@ model Projects {
   user User @relation(fields: [userId], references: [id])
 
   endpoints Endpoints[]
+  requestLogs RequestLog[]
 }
 
-model Endpoint {
+model Endpoints {
   id String @id @default(uuid())
   name String 
   url String 
@@ -51,9 +52,9 @@ model Endpoint {
   createdAt DateTime @default(now())
 
   projectId String 
-  project Project @relation(fields: [projectId], references: [id])
+  project Projects @relation(fields: [projectId], references: [id])
 
-  requestLogs RequestLog[]
+ 
 }
 
 model RequestLog {
@@ -65,7 +66,7 @@ model RequestLog {
   createdAt     DateTime @default(now())
 
   projectId     String
-  project       Project  @relation(fields: [projectId], references: [id])
+  project       Projects  @relation(fields: [projectId], references: [id])
 
   @@index([projectId])
 }
