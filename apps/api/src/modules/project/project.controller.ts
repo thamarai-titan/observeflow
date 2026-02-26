@@ -79,3 +79,11 @@ export const DeleteProjectController = async (req: Request<Params>, res: Respons
     return res.status(500).json(responses.error("INTERNEL_SERVER_ERROR"))
   }
 }
+
+export const RotateApiKeyController = async (req: Request, res: Response) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+}
