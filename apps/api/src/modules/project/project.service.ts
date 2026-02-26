@@ -29,3 +29,34 @@ export const CreateProjectService = async (data: ProjectType, userId: string)=> 
         throw error
     }
 }
+
+
+export const GetallProjectService = async (userId: string) => {
+    try {
+        const projects = await prisma.projects.findMany({
+            where: {
+                userId
+            }
+        })
+
+
+        return projects
+    } catch (error) {
+        throw error
+    }
+}
+
+
+export const DeleteProjectService = async (userId: string, projectId: string) => {
+    try {
+        const project = await prisma.projects.delete({
+            where: {
+                id: projectId,
+                userId
+            }
+        })
+        return project
+    } catch (error) {
+        throw error
+    }
+}
