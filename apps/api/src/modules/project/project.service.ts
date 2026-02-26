@@ -60,3 +60,24 @@ export const DeleteProjectService = async (userId: string, projectId: string) =>
         throw error
     }
 }
+
+export const RotateApiKeyService = async (projectId: string) => {
+    try {
+        const apiKey = randomBytes(32).toString('hex')
+        const project = await prisma.projects.update({
+            where: {
+                id: projectId
+            },
+            data: {
+                apiKey
+            },
+            select: {
+                apiKey: true
+            }
+        })
+
+        return project
+    } catch (error) {
+        throw error
+    }
+}
