@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { ProjectSchema, type ProjectType } from "./project.schema";
-import { CreateProjectService, DeleteProjectService, GetallProjectService } from "./project.service";
+import { CreateProjectService, DeleteProjectService, GetallProjectService, RotateApiKeyService } from "./project.service";
 import { responses } from "../../lib/responses";
 import { Prisma } from "@prisma/client";
 
@@ -80,10 +80,15 @@ export const DeleteProjectController = async (req: Request<Params>, res: Respons
   }
 }
 
-export const RotateApiKeyController = async (req: Request, res: Response) => {
+export const RotateApiKeyController = async (req: Request<Params>, res: Response) => {
   try {
-    
-  } catch (error) {
-    
+    const projectId = req.params.projectId as string
+    const apiKey = await RotateApiKeyService(projectId)
+
+    res.status(200).json(responses.success({
+      apiKey
+    }))
+  } catch (error: any) {
+    res.status(500).json(responses.error("INTERNEL_SERVER_ERROR"))
   }
 }
