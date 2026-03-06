@@ -9,5 +9,8 @@
   },
   "peerDependencies": {
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "recharts": "^3.7.0"
   }
 }
